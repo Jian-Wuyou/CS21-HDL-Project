@@ -36,5 +36,5 @@ module datapath(input  logic        clk, reset,
 
   // ALU logic
   mux2 #(32)  srcbmux(writedata, signimm, alusrc, srcb);
-  alu         alu(srca, srcb, alucontrol, aluout, zero);
+  alu         alu(srca, srcb, instr[10:6], alucontrol, aluout, zero);
 endmodule

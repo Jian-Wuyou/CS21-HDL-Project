@@ -14,6 +14,7 @@ module aludec(input  logic [5:0] funct,
           6'b100100: alucontrol <= 4'b0000; // and
           6'b100101: alucontrol <= 4'b0001; // or
           6'b101010: alucontrol <= 4'b0111; // slt
+          6'b000000: alucontrol <= 4'b1000; // sll
           default:   alucontrol <= 4'bxxxx; // ???
         endcase
     endcase

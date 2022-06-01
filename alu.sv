@@ -1,4 +1,5 @@
 module alu(input  logic [31:0] a, b,
+           input  logic [4:0]  shamt,
            input  logic [3:0]  alucontrol,
            output logic [31:0] result,
            output logic        zero);
@@ -11,6 +12,7 @@ module alu(input  logic [31:0] a, b,
   always_comb
     if (alucontrol[3])
       case (alucontrol[2:0])
+        3'b000: result = a << shamt;
       endcase
     else
       case (alucontrol[1:0])
