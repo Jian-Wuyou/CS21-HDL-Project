@@ -5,13 +5,14 @@ module controller(input  logic [5:0] op, funct,
                   output logic       pcsrc, alusrc,
                   output logic       regdst, regwrite,
                   output logic       jump,
-                  output logic [2:0] alucontrol);
+                  output logic [2:0] alucontrol,
+                  output logic       byte_enable);
 
   logic [1:0] aluop;
   logic       branch;
 
-  maindec md(op, memtoreg, memwrite, branch,
-             alusrc, regdst, regwrite, jump, aluop);
+  maindec md(op, memtoreg, memwrite, branch, alusrc,
+             regdst, regwrite, jump, aluop, byte_enable);
   aludec  ad(funct, aluop, alucontrol);
 
   assign pcsrc = branch & zero;
