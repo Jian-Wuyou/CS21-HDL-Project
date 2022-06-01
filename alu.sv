@@ -1,5 +1,5 @@
 module alu(input  logic [31:0] a, b,
-           input  logic [2:0]  alucontrol,
+           input  logic [3:0]  alucontrol,
            output logic [31:0] result,
            output logic        zero);
   
@@ -9,12 +9,16 @@ module alu(input  logic [31:0] a, b,
   assign sum = a + condinvb + alucontrol[2];
  
   always_comb
-    case (alucontrol[1:0])
-      2'b00: result = a & b;
-      2'b01: result = a | b;
-      2'b10: result = sum;
-      2'b11: result = sum[31];
-    endcase
+    if (alucontrol[3])
+      case (alucontrol[2:0])
+      endcase
+    else
+      case (alucontrol[1:0])
+        2'b00: result = a & b;
+        2'b01: result = a | b;
+        2'b10: result = sum;
+        2'b11: result = sum[31];
+      endcase
 
   assign zero = (result == 32'b0);
 endmodule
