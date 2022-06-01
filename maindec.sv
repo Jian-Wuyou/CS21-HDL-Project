@@ -20,6 +20,12 @@ module maindec(input  logic [5:0] op,
       6'b000100: controls <= 10'b0001000010; // BEQ
       6'b001000: controls <= 10'b1010000000; // ADDI
       6'b000010: controls <= 10'b0000001000; // J
+
+      6'b111111: begin  // Custom stop opcode, for testing only
+                   controls <= 10'bxxxxxxxxxx;
+                   $display("Simulation stopped");
+                   $stop;
+                 end
       default:   controls <= 10'bxxxxxxxxxx; // illegal op
     endcase
 endmodule
