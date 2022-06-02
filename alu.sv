@@ -13,6 +13,7 @@ module alu(input  logic [31:0] a, b,
     if (alucontrol[3])
       case (alucontrol[2:0])
         3'b000: result = b << shamt;
+        3'b001: result = a & (32'hFFFFFFFE << b[4:0]);
       endcase
     else
       case (alucontrol[1:0])
