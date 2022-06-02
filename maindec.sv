@@ -23,6 +23,7 @@ module maindec(input  logic [5:0] op,
       6'b000010: controls <= 11'b00000010000; // J
       
       6'b010001: controls <= 11'b10000000001; // LI
+      6'b101000: controls <= 11'b00101000010; // SB
 
       6'b111111: begin  // Custom stop opcode, for testing only
                    controls <= 11'bxxxxxxxxxxx;
