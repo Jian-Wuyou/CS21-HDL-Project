@@ -5,6 +5,7 @@ module datapath(input  logic        clk, reset,
                 input  logic        alusrc, regdst,
                 input  logic        regwrite, jump,
                 input  logic [3:0]  alucontrol,
+                input  logic        res_zeroextimm,
                 output logic        zero,
                 output logic [31:0] pc,
                 input  logic [31:0] instr,
@@ -16,6 +17,7 @@ module datapath(input  logic        clk, reset,
   logic [31:0] signimm, signimmsh;
   logic [31:0] srca, srcb;
   logic [31:0] result;
+  logic [31:0] limux_aluout;
 
   // next PC logic
   flopr #(32) pcreg(clk, reset, pcnext, pc);
@@ -31,7 +33,8 @@ module datapath(input  logic        clk, reset,
                  writereg, result, srca, writedata);
   mux2 #(5)   wrmux(instr[20:16], instr[15:11],
                     regdst, writereg);
-  mux2 #(32)  resmux(aluout, readdata, memtoreg, result);
+  mux2 #(32)  limux(aluout, {{16{0}}, instr[15:0]}, res_zeroextimm, limux_aluout);
+  mux2 #(32)  resmux(limux_aluout, readdata, memtoreg, result);
   signext     se(instr[15:0], signimm);
 
   // ALU logic

@@ -12,7 +12,7 @@ module alu(input  logic [31:0] a, b,
   always_comb
     if (alucontrol[3])
       case (alucontrol[2:0])
-        3'b000: result = a << shamt;
+        3'b000: result = b << shamt;
       endcase
     else
       case (alucontrol[1:0])
