@@ -8,6 +8,7 @@ module aludec(input  logic [5:0] funct,
     case(aluop)
       2'b00: alucontrol <= 4'b0010;  // add (for lw/sw/addi)
       2'b01: alucontrol <= 4'b0110;  // sub (for beq)
+      2'b10: alucontrol <= 4'b1111;  // sgt (for ble)
       default: case(funct)          // R-type instructions
           6'b100000: alucontrol <= 4'b0010; // add
           6'b100010: alucontrol <= 4'b0110; // sub

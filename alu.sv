@@ -14,13 +14,17 @@ module alu(input  logic [31:0] a, b,
       case (alucontrol[2:0])
         3'b000: result = b << shamt;
         3'b001: result = a & (32'hFFFFFFFE << b[4:0]);
+        3'b111: begin
+                result = ~sum + 1;
+                result = result[31];
+                end
       endcase
     else
       case (alucontrol[1:0])
         2'b00: result = a & b;
         2'b01: result = a | b;
         2'b10: result = sum;
-        2'b11: result = sum[31];
+        2'b11: result = sum[31];                // a < b
       endcase
 
   assign zero = (result == 32'b0);
