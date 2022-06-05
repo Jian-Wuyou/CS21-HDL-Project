@@ -15,7 +15,7 @@ module maindec(input  logic [5:0] op,
 
   always_comb
     case(op)
-      6'b000000: controls <= 11'b11000001000; // RTYPE
+      6'b000000: controls <= 11'b11000011000; // RTYPE
       6'b100011: controls <= 11'b10100100000; // LW
       6'b101011: controls <= 11'b00101000000; // SW
       6'b000100: controls <= 11'b00010000100; // BEQ
